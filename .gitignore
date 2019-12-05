@@ -1,0 +1,13 @@
+*.aux
+*.log
+*.toc
+*.bbl
+*.blg
+*.bgl
+*.el
+**/auto/*
+*.synctex.gz
+*.out
+*camera-ready.zip
+_region_.tex
+*.pdf

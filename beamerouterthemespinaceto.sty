@@ -1,0 +1,70 @@
+% Beamer theme by antonio vergari <arranger1044[aT]aim[DoT]com>
+% based on the LaTeX-Beamer package
+% Part of the beamer theme spinaceto (based on my previous theme enziteto)
+% 
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 3.
+% 
+% 
+\ProvidesPackage{beamerouterthemespinaceto}[2018/12/25]
+
+\usepackage{etoolbox}
+
+\mode<presentation>
+
+%
+% using miniframes
+% \useoutertheme[subsection=false, footline=authorinstitutetitle, compress]{miniframes}
+\useoutertheme[subsection=false, footline=authorinstitutetitle]{miniframes}
+
+%
+% increasing top margin
+\setbeamertemplate{headline}{}
+% \addtobeamertemplate{headline}{\vspace{7pt}\hspace{10pt}}{\hspace{10pt}}
+
+
+%
+% Frame title customization
+\defbeamertemplate*{frametitle}{spinaceto}[1][]
+{
+  \vskip25pt%
+  \insertframetitle\par
+  \ifdefined\insertframesubtitle
+  \usebeamerfont{framesubtitle}\insertframesubtitle
+  \fi
+}
+
+\defbeamertemplate*{frametitle}{htt}[2][]
+{
+  \vskip25pt%
+  \htt[#2]{\emph{\insertframetitle}}\par\vskip2pt
+  \ifdefined\insertframesubtitle
+  \usebeamerfont{framesubtitle}\insertframesubtitle
+  \fi
+}
+
+\BeforeBeginEnvironment{frame}{%
+  \setbeamertemplate{frametitle}[spinaceto]%
+}
+
+\makeatletter
+\define@key{beamerframe}{htt}[lacamdarklilac]{%
+  \setbeamertemplate{frametitle}[htt]{#1}%
+}
+\makeatother
+
+%
+% Footline
+%
+%
+% slide numbers
+\defbeamertemplate*{footline}{spinaceto}[1][]{%
+  \vspace{-125pt}
+  % \hfill% \usebeamertemplate***{navigation symbols}
+  \hspace{420pt}
+  \raisebox{15pt}{{\footnotesize\textbf{\insertframenumber{}}}/\inserttotalframenumber}
+}
+
+
+
+\mode<all>
