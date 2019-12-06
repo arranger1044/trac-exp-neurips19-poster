@@ -467,37 +467,87 @@ draw
     \htt[\expcols]{{Motivation}}
 \end{textblock}
   
+
 \begin{textblock}{38}(0, 23)
   \large
   In presence of uncertainty, one needs to
   probabilistically reason about the \emph{\textbf{expected predictions}} of
   regressors and classifiers.
-
- \vspace{25pt}
- Appears in many interesting applications such as handling missing values, fairness, and data analysis. 
-
- \vspace{25pt}
- More generally, we want to \emph{\textbf{compute {the $k$-th moment}}} of a predictive model $f$ w.r.t.\ the feature distribution $p$:
- \begin{equation*}
-        M_k(f,p) \triangleq \EX\nolimits_{\x \sim p(\x)} \left[ (f(\x))^k
-        \right]
-        \label{eq:mom}
-  \end{equation*} 
+  \comment{predicting with missing values, active sensing,\ldots}{}
+  %\comment{active sensing}{}
+  
+  % More generally this equals to computing the
+  % \emph{the $k$-th moment} of a predictive model $f$ with respect
+  % to the feature distribution $p$
+  % \begin{equation}
+  %   M_k(f,p) \triangleq \EX\nolimits_{\x \sim p(\x)} \left[ (f(\x))^k \right].
+  % \end{equation}
 
 \end{textblock}
 
-\begin{textblock}{17}(0, 40)
+
+\begin{textblock}{38}(0, 29.5)
+  \large  
+  More generally this equals to \emph{\textbf{computing {the $k$-th moment}}} of a predictive model $f$ w.r.t.\ the feature distribution $p$:
+  \begin{equation*}
+    M_k(f,p) \triangleq \EX\nolimits_{\x \sim p(\x)} \left[ (f(\x))^k
+    \right]
+    \label{eq:mom}
+\end{equation*} 
+\end{textblock}
+
+\begin{textblock}{17}(0, 39)
     \usebeamerfont{section name}
     \htt[\expcols]{{Complexity results}}
 \end{textblock}
 
-\begin{textblock}{39}(0, 43.5)
+\begin{textblock}{39}(0, 42.5)
   \large
-  In general, this computation is not tractable. It is hard even for simple pairs of models naive Bayes and logistic regression~\cite{Khosravi2019}.
+  Surprisingly computing moments is \emph{\textbf{hard for even simple models}}:\\[10pt]
+  % Computing Eq.~\ref{eq:mom} is in general computationally hard
+  % \begin{equation*}
+  %   \begin{rcases}
+  %     f &\text{ is a logistic regressor}\quad \wedge\\
+  %     p &\text{ is a Naive Bayes}
+  %   \end{rcases}
+  %   \boldsymbol\Rightarrow\text{ NP-Hard!}
+  % \end{equation*}
+  % \begin{equation*}
+  %   \begin{rcases}
+  %     f &\text{\ is a regression circuit} \wedge\\
+  %     p &\text{\ is a generative circuit} \wedge\\
+  %     f &\text{ and} p \text{have the same vtree}
+  %   \end{rcases}
+  %   \text{ polytime!}
+  % \end{equation*}
+  \hfill\begin{minipage}{0.94\linewidth}
+  \begin{itemize}
+    \setlength{\itemsep}{10pt}
+  % \item arbitrary $f$ and $p$ \\[-10pt]
+  %   \commenti{\#P-Hard}{}
+  \item $f$ is a {\emph{logistic regressor}} and $p$
+    \emph{{Naive Bayes}}\\[-50pt] %$\color{violet}\boldsymbol\Rightarrow$
+    \commenti{{\textbf{NP-Hard}}~\cite{Khosravi2019}}{}    
+    % \\[-10pt]
+    % \commenti{NP-Hard}{}
+%$\color{violet}\boldsymbol\Rightarrow$ \emph{\color{tractable_green} \textbf{polytime algorithm}}!
+ %  \item $f$ is a \emph{{regression circuit}} and $p$ is a \emph{{generative
+%         circuit}}\par with {\emph{different v-tree}}\\[-60pt]
+%     \commenti{{\color{untractable_red}\textbf{proved \#P-Hard! {\large\frownie{}}}}}{}
+% %$\color{violet}\boldsymbol\Rightarrow$ 
+%   \item $f$ is a \emph{{classification circuit}} and $p$ is a \emph{{generative
+%         circuit}}\par with {\emph{different v-tree}}\\[-50pt]
+%     \commenti{{\color{untractable_red}\textbf{proved NP-Hard! {\large\frownie{}}}}  {}}{}
+%     %$\color{violet}\boldsymbol\Rightarrow$
+%     %\emph{\color{untractable_red}\textbf{proved NP-Hard}}!
+%   \item  $f$ is a \emph{{regression circuit}} and $p$ is a \emph{{generative
+%         circuit}}\par with the {\emph{same v-tree}}\\[-60pt]
+%     \commenti{ {\color{tractable_green} \textbf{polytime algorithm! {\large\smiley{}}}}}{}
+  \end{itemize}  
+\end{minipage}
+\vspace{20pt}
 
-  \vspace{20pt}
-
-  We consider \emph{\textbf{expressive models}} represented as \emph{\textbf{probabilistic circuits}}~\cite{Darwiche2003}:\\[10pt]
+  We consider \emph{\textbf{expressive models}} represented as \emph{\textbf{circuits}}~\cite{Darwiche2003}:\\[10pt]
   \hfill\begin{minipage}{0.95\linewidth}
   \begin{itemize}
     \setlength{\itemsep}{10pt}
@@ -530,7 +580,7 @@ draw
 \begin{textblock}{17}(0, 65)
     \usebeamerfont{section name}
     \htt[\expcols]{{Generative and discriminative}}\\[-5pt]
-    \htt[\expcols]{{circuits}}
+    \htt[\expcols]{{circuit pairs}}
 \end{textblock}
 
 
@@ -559,8 +609,6 @@ g_{m}(\x) =
 \end{cases} 
 \label{eq:glc-semantics}
 \end{equation*}
-
-\vspace{40pt}
 For classification, we use a \emph{\textbf{logistic circuit}}
 (\textbf{LC})~\cite{LiangAAAI19}, modeling $f(\x) = \gamma\circ g_r(\x) = 1 / (1+e^{-g_r(\x)})$.\par
 
@@ -568,7 +616,7 @@ For classification, we use a \emph{\textbf{logistic circuit}}
 
 \end{textblock}
 
-\begin{textblock}{38}(42, 15)
+\begin{textblock}{38}(42, 18)
   \includegraphics[width=.15\columnwidth]{figures/vtree}\hspace{80pt}
   \includegraphics[width=.3\columnwidth]{figures/psdd}\hspace{80pt}
   \includegraphics[width=.35\columnwidth]{figures/lgc}\\[30pt]
@@ -580,62 +628,79 @@ For classification, we use a \emph{\textbf{logistic circuit}}
 
 
 
-\begin{textblock}{17}(42, 34)
+\begin{textblock}{17}(42, 39)
     \usebeamerfont{section name}
     %\normalsize
     \htt[\expcols]{{Recursive moment decomposition}}
 \end{textblock}
-\begin{textblock}{38}(42, 38)
-  %\large
-  
-  Recursively "pushes down" the computation to their children.
-  
- \begin{center}
-      \includegraphics[width=.20\columnwidth]{figures/recursive_example_p.pdf}\hspace{80pt}
-      \includegraphics[width=.20\columnwidth]{figures/recursive_example_f.pdf}\hspace{80pt}
- \end{center}
- \commenta{For example, the computation for the pair of OR nodes $(n,m)$  involves solving subproblems $(1,3), (1,4), (2, 3), (3,4)$.}
+\begin{textblock}{38}(42, 42.5)
+  \large
 
-\vspace{40pt}
-Moments are computed \textbf{\emph{exactly}} in $O(k^2\cdot  |p_n|\cdot |g_m|)$.
+The $k$-th moment $M_k(g_m, p_n)$ of two OR gates is:
+\begin{align*}
+        \sum\nolimits_{i\in\ch(n)} \theta_i \sum\nolimits_{j\in\ch(m)} \sum_{l=0}^k \binom{k}{l} \phi_j^{k-l} M_l(\mathds{1}_j \cdot g_j, p_i)
+\end{align*}\vspace{10pt}
+
+while for AND gates $M_k(\mathds{1}_m\cdot g_m, p_n)$ is
+\begin{align*}
+        \sum\nolimits_{l=0}^k \binom{k}{l} M_l(\mathds{1}_{m_\Li} \cdot g_{m_\Li}, p_{n_\Li}) M_{k-l}(\mathds{1}_{m_\R} \cdot g_{m_\R}, p_{n_\R})
+\end{align*}\vspace{-20pt}
+\commentia{exactly computable in $O(k^2\cdot  |p_n|\cdot |g_m|)$}{}
 \end{textblock}
 
-\begin{textblock}{17}(42, 54)
+  
+
+
+\begin{textblock}{17}(42, 62)
     \usebeamerfont{section name}
     %\normalsize
     \htt[\expcols]{{Reasoning with missing values}}
 \end{textblock}
-\begin{textblock}{38}(42, 58)
-  Given partial evidence $\x^{o}$ we want to compute
+\begin{textblock}{38}(42, 65.5)
+  \large
+  %In  presence of missing values $\x^{m}$ we exactly compute
   \begin{align*}
     \EX\nolimits_{\x^{m}\sim p(\x^{m}|\x^{o})}\left[f(\x^m \x^o)\right] = 
     \frac{1}{p(\x^{o})}\EX\nolimits_{\x^{m}\sim p(\x^{m}, \x^{o})}\left[f(\x^m \x^o)\right]
     \label{eq:exp-miss-ii}
   \end{align*}
-
-    \vspace{30pt}
-    \textbf{Regression:} We can do this exactly, and expected prediction outperforms many imputation strategies such as mean, median, MPE, and MICE.
-    
-    \begin{center}
-        \includegraphics[width=.25\columnwidth]{figures/abalone_try-I_sqrtmse_plot_merged-crop.pdf}\hspace{20pt}
-        \includegraphics[width=.25\columnwidth]{figures/delta-ailerons_try-I_sqrtmse_plot_merged-crop.pdf}\hspace{20pt}
-        \includegraphics[width=.25\columnwidth]{figures/elevators_try-I_sqrtmse_plot_merged-crop.pdf}\\[5pt]
-    \end{center}
-
-    \vspace{20pt}
-    \textbf{Classification:} We provide an approximation via a Taylor series of sigmoid and the moments of $g$. The $1^\text{st}$ order approximation already outperforms several baselines (see paper). 
-
+  \commenti{computing $p(\x^{o})$ is easy on a PSDD}{}
+  \vspace{40pt}
+\includegraphics[width=.3\columnwidth]{figures/abalone_try-I_sqrtmse_plot_merged-crop.pdf}\hspace{20pt}
+\includegraphics[width=.3\columnwidth]{figures/delta-ailerons_try-I_sqrtmse_plot_merged-crop.pdf}\hspace{20pt}
+%\includegraphics[width=.4\columnwidth]{figures/insurance_try-I_sqrtmse_plot_merged-crop.pdf}
+\includegraphics[width=.3\columnwidth]{figures/elevators_try-I_sqrtmse_plot_merged-crop.pdf}\\[5pt]
+\commenti{Outperforming imputation strategies as mean, median,
+MPE, MICE}{} 
 \end{textblock}
   
-\begin{textblock}{17}(42, 83)
+\begin{textblock}{17}(42, 89)
     \usebeamerfont{section name}
     %\normalsize
-    \htt[\expcols]{{Analyzing behaviour of classifiers}}
+    \htt[\expcols]{{Approximate moments of classifiers}}
 \end{textblock}
 
-\begin{textblock}{38}(42, 87)
-     Test, Given partial evidence $\x^{o}$ we want to compute
+\begin{textblock}{38}(42, 92.5)
+  For a non-linearity $\gamma$ we approximate
+  $M_1(\gamma \circ g_m, p_n)$ via a $d$-order Taylor approximation
+  involving the moments of $g$:
+  \begin{align*}
+    % &\EX\nolimits_{\x\sim p_{n}(\x)}  \sum\nolimits_{i=0}^{\infty}
+    % \frac{\gamma^{(i)}(\alpha)}{i!} \big(g_{m}(\x) - \alpha\big)^{i}
+    % \\
+    \EX\nolimits_{\x\sim p_{n}(\x)}\left[ \gamma \circ g_m(\x) \right]\approx \sum\nolimits_{i=0}^{d} \frac{\gamma^{(i)}(\alpha)}{i!}
+    % \EX\nolimits_{\x\sim p_{n}(\x)} \big(g_{m}(\x) - \alpha\big)^{i}
+    M_{i}(g_{m}-\alpha, p_n)
+    \triangleq T_{d}(\gamma \circ g_m, p_n)
+  \end{align*}
+  \vphantom{Ag}\\[10pt]
+  \hspace{100pt}\includegraphics[width=.35\columnwidth]{figures/mnist_trial-III_all_plot_merged-crop.pdf}\hspace{40pt}
+  \includegraphics[width=.35\columnwidth]{figures/fmnist_trial-III_all_plot_merged-crop.pdf}\\[10pt]
+  \commenti{First order approximation already outperforms several baselines}{} 
+
 \end{textblock}
+
+  
 
 \begin{textblock}{17}(0, 104)
     \usebeamerfont{section name}
