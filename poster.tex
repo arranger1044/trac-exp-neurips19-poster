@@ -462,19 +462,19 @@ draw
 
   
   
-\begin{textblock}{17}(0, 19.5)
+\begin{textblock}{17}(0, 18)
     \usebeamerfont{section name}
     \htt[\expcols]{{Motivation}}
 \end{textblock}
   
-\begin{textblock}{38}(0, 23)
+\begin{textblock}{38}(0, 22)
   \large
   In presence of uncertainty, one needs to
   probabilistically reason about the \emph{\textbf{expected predictions}} of
   regressors and classifiers.
 
  \vspace{25pt}
- Appears in many interesting applications such as handling missing values, fairness, and data analysis. 
+ Expected Prediction appears in many interesting applications such as  \emph{handling missing values, fairness, and data analysis}. 
 
  \vspace{25pt}
  More generally, we want to \emph{\textbf{compute {the $k$-th moment}}} of a predictive model $f$ w.r.t.\ the feature distribution $p$:
@@ -486,7 +486,7 @@ draw
 
 \end{textblock}
 
-\begin{textblock}{17}(0, 40)
+\begin{textblock}{17}(0, 39.5)
     \usebeamerfont{section name}
     \htt[\expcols]{{Complexity results}}
 \end{textblock}
@@ -498,6 +498,7 @@ draw
   \vspace{20pt}
 
   We consider \emph{\textbf{expressive models}} represented as \emph{\textbf{probabilistic circuits}}~\cite{Darwiche2003}:\\[10pt]
+  \vspace{20pt}
   \hfill\begin{minipage}{0.95\linewidth}
   \begin{itemize}
     \setlength{\itemsep}{10pt}
@@ -527,10 +528,11 @@ draw
 \end{textblock}
 
 
-\begin{textblock}{17}(0, 65)
+%\begin{textblock}{17}(0, 65)
+\begin{textblock}{17}(0, 67.5)
     \usebeamerfont{section name}
-    \htt[\expcols]{{Generative and discriminative}}\\[-5pt]
-    \htt[\expcols]{{circuits}}
+    \htt[\expcols]{{Generative and discriminative circuits}}\\[-5pt]
+    %\htt[\expcols]{{circuits}}
 \end{textblock}
 
 
@@ -568,7 +570,7 @@ For classification, we use a \emph{\textbf{logistic circuit}}
 
 \end{textblock}
 
-\begin{textblock}{38}(42, 15)
+\begin{textblock}{38}(42, 14)
   \includegraphics[width=.15\columnwidth]{figures/vtree}\hspace{80pt}
   \includegraphics[width=.3\columnwidth]{figures/psdd}\hspace{80pt}
   \includegraphics[width=.35\columnwidth]{figures/lgc}\\[30pt]
@@ -580,32 +582,31 @@ For classification, we use a \emph{\textbf{logistic circuit}}
 
 
 
-\begin{textblock}{17}(42, 34)
+\begin{textblock}{17}(42, 33)
     \usebeamerfont{section name}
     %\normalsize
     \htt[\expcols]{{Recursive moment decomposition}}
 \end{textblock}
-\begin{textblock}{38}(42, 38)
-  %\large
-  
+\begin{textblock}{38}(42, 37)
+  \large
   Recursively "pushes down" the computation to their children.
   
  \begin{center}
       \includegraphics[width=.20\columnwidth]{figures/recursive_example_p.pdf}\hspace{80pt}
       \includegraphics[width=.20\columnwidth]{figures/recursive_example_f.pdf}\hspace{80pt}
  \end{center}
- \commenta{For example, the computation for the pair of OR nodes $(n,m)$  involves solving subproblems $(1,3), (1,4), (2, 3), (3,4)$.}
+ \commenta{For example, for the pair of OR nodes $(n,m)$ the computation involves solving subproblems $(1,3), (1,4), (2, 3), (3,4)$.}
 
 \vspace{40pt}
-Moments are computed \textbf{\emph{exactly}} in $O(k^2\cdot  |p_n|\cdot |g_m|)$.
+The $k^{\text{th}}$ moments are computed \textbf{\emph{exactly}} in $O(k^2\cdot  |p_n|\cdot |g_m|)$.
 \end{textblock}
 
-\begin{textblock}{17}(42, 54)
+\begin{textblock}{17}(42, 53)
     \usebeamerfont{section name}
-    %\normalsize
     \htt[\expcols]{{Reasoning with missing values}}
 \end{textblock}
-\begin{textblock}{38}(42, 58)
+\begin{textblock}{38}(42, 57)
+  \large
   Given partial evidence $\x^{o}$ we want to compute
   \begin{align*}
     \EX\nolimits_{\x^{m}\sim p(\x^{m}|\x^{o})}\left[f(\x^m \x^o)\right] = 
@@ -614,7 +615,7 @@ Moments are computed \textbf{\emph{exactly}} in $O(k^2\cdot  |p_n|\cdot |g_m|)$.
   \end{align*}
 
     \vspace{30pt}
-    \textbf{Regression:} We can do this exactly, and expected prediction outperforms many imputation strategies such as mean, median, MPE, and MICE.
+    \textbf{Regression:} Expected prediction outperforms many imputation strategies such as mean, median, MPE, and MICE.
     
     \begin{center}
         \includegraphics[width=.25\columnwidth]{figures/abalone_try-I_sqrtmse_plot_merged-crop.pdf}\hspace{20pt}
@@ -623,18 +624,40 @@ Moments are computed \textbf{\emph{exactly}} in $O(k^2\cdot  |p_n|\cdot |g_m|)$.
     \end{center}
 
     \vspace{20pt}
-    \textbf{Classification:} We provide an approximation via a Taylor series of sigmoid and the moments of $g$. The $1^\text{st}$ order approximation already outperforms several baselines (see paper). 
+    \textbf{Classification:} We provide an approximation involving Taylor series and moments of $g$, which also outperforms several baselines (see paper). 
 
 \end{textblock}
   
-\begin{textblock}{17}(42, 83)
+\begin{textblock}{17}(42, 84)
     \usebeamerfont{section name}
     %\normalsize
-    \htt[\expcols]{{Analyzing behaviour of classifiers}}
+    \htt[\expcols]{{Analyze behaviour of predictive models}}
 \end{textblock}
 
-\begin{textblock}{38}(42, 87)
-     Test, Given partial evidence $\x^{o}$ we want to compute
+\begin{textblock}{38}(42, 88)
+    \large
+    \textbf{Insurance dataset}: yearly health insurance costs of people living in the USA.
+    
+    \textbf{Q1:} “Difference of insurance costs between smokers and non smokers?”
+    \begin{equation*}
+        M_1(f,\ p(.\ \vert\ \textit{Smoker})) - M_1(f,\ p(.\ \vert\ \textit{Non Smoker})) = 22,614
+    \end{equation*}
+    
+    \vspace{20pt}
+    
+    \textbf{Q2:} "Is the predictive model    biased by gender?"
+    \begin{equation*}
+        M_1(f,\ p(.\ \vert\ \textit{Female})) - M_1(f,\ p(.\ \vert\ \textit{Male})) = 974
+    \end{equation*}
+
+    \vspace{20pt}
+    
+    \textbf{Q3:} "Expected cost of a female ($\mathsf{F}$) smokers ($\mathsf{S}$) with one child ($\mathsf{C}$)" living in southeast ($\mathsf{SE}$)? How about Std of the cost?"   
+    \begin{align*}
+       \mu &= M_1(f,p(.\ \vert\  \mathsf{F,S,C,SE})) &= 30,974 \\
+        \sigma &= \sqrt{M_2(.) - (M_1(.))^2} &= 11,229
+    \end{align*}
+    
 \end{textblock}
 
 \begin{textblock}{17}(0, 104)
